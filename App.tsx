@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,7 +19,7 @@ export default function App() {
 }
 
 function PlayerScreen({ navigation }: any){
-  const [player1, setPlayer1] = useState<string>('');
+    const [player1, setPlayer1] = useState<string>('');
   const [player2, setPlayer2] = useState<string>('');
 
   return (
@@ -42,16 +41,17 @@ function PlayerScreen({ navigation }: any){
 
       <Button
         title="Start Game"
-        onPress={() => navigation.navigate('Game')}
+        onPress={() => navigation.navigate('Game', {player1: player1, player2: player2})}
       />
     </View>
   );
 }
 
 function GameScreen({ navigation, route} : any){
+  const { player1, player2 } = route.params; 
   return(
     <View style={styles.container}>
-      <Text style={styles.title}>Player 1 vs. Player 2</Text>
+      <Text style={styles.title}>{player1} vs. {player2}</Text>
     </View>
   );
 }
